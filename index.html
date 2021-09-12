@@ -1,0 +1,25 @@
+<html style="font-size:14px;">
+  <head>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  </head>
+  <div id='app'>
+    <main style="padding:2rem;">
+        <div class="x-container">
+            <div class="card" v-for="item in firstCollections">
+                <div class="card-header">
+                    <a :href="item.url" target="_blank">{{item.title}}</a>
+                </div>
+                <div class="card-body">
+                    <p class="card-desc">{{item.desc}}</p>
+                    <a class="btn-link" :href="item.url" target="_blank" >前往</a>
+                </div>
+            </div>
+        </div>
+       
+    </main>
+  </div>
+  <body>
+    <script type="text/javascript" src="./js/index.js"></script>
+  </body>
+</html>
