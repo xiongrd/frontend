@@ -1,13 +1,40 @@
-:root{
-    --primary-color:#6c00aa;
-    --primary-color-light:#ceafff;
+/* purple-indigo */
+/* :root{
+    --primary-color:hsl(286, 87%, 38%);
+    --primary-color-light:hsl(281, 63%, 72%);
+    --primary-bg-color-light:rgb(243, 235, 255);
     --padding-primary:0.5rem 1rem;
     --card-body-padding:0.5rem 1rem 1rem 1rem;
+    --primary-border-radius:5px;
+    --card-color:#333;
+    --card-background-color:white;
+} */
+
+/* blue-green */
+:root{
+    --primary-color:hsl(209, 96%, 42%);
+    --primary-color-light:hsl(209, 96%, 82%);
+    --primary-bg-color-light:hsl(209, 48%, 95%);
+     /* padding 大小 */
+    --padding-primary:0.5rem 1rem;
+    --padding-x-lg:2rem;
+    --padding-x-md:1rem;
+    --padding-x-sm:0.5rem;
+
+    --card-body-padding:0.5rem 1rem 1rem 1rem;
+    --primary-border-radius:5px;
+    --card-color:#333;
+    --card-background-color:white;
+}
+
+html{
+    font-size:16px;
 }
 body {
     margin:0;
-    background:#f2f5ff;
+    background:var(--primary-bg-color-light);
 }
+
 *{
 
     box-sizing: border-box;
@@ -15,16 +42,54 @@ body {
 *::selection {
     background:var(--primary-color-light);
 }
-p{
-    margin:0;
+
+
+#app{
+}
+.main{
+    display:flex;
+}
+.aside-main{
+    
+    width:280px;
+}
+.nav-main::before{
+    z-index:-1;
+    content:'';
+    position: absolute;
+    inset:0 0 0 0;
+    background:url(
+        data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAEdJREFUKFONkEEKADAIw+r/H604KGhR5i67pGnRcHx25JCgA+0fszRWmGBrU2NCGn5B3Zjm1Vg36V4GbTLWarb67zyrcT1rABZjDwpeLMnYAAAAAElFTkSuQmCC
+    ) repeat;
+}
+.container{
+    width:1366px;
+    margin:0 auto;
+}
+.nav-main{
+    position:relative;
+    background:repeating-linear-gradient(30deg,#ffffff22,#ffffffff 20px),repeating-linear-gradient(120deg,#ffffffdd,#ffffffff 20px);
+    display:flex;align-items:center;
+    padding:0.5rem calc(var(--padding-x-lg) + 0.5rem);
+    width:100%;
+    height:5rem;
+}
+.nav-brand {
+    padding:var(--padding-primary);
+}
+.nav-brand .title{
+    font-size:2rem;
+}
+.nav-aside{
+    width: 20rem ;
+    background:#456;
 }
 .card {
     flex:0 0 auto;
-    background:white;
-    width:18rem;
-
-    border:1px solid #dae0f0;
-    border-radius: 5px;
+    background:var(--card-background-color);
+    color:var(--card-color);
+    /* border:1px solid #dae0f0; */
+    border-radius: var(--primary-border-radius);
     transition:box-shadow 0.3s;
 }
 .card > .card-header
@@ -34,7 +99,11 @@ p{
 .card > .card-body{
     padding:var(--card-body-padding);
 }
+.card-header a{
+    color:var(--card-color);
+}
 .card-header{
+    color:var(--card-color);
     font-size:1.15rem;
     font-weight:bold;
 }
@@ -45,8 +114,17 @@ p{
     
 }
 .x-container>*{
-    margin:0.5rem 1rem;
+    margin:0rem 1rem 0.5rem 1rem;
 }
+.y-container{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.y-container > * {
+}
+
 
 .card:hover{
     box-shadow:0 0 5px 1px #00000010,0 0 10px 4px #00000005;
@@ -55,23 +133,22 @@ p{
     overflow:hidden;
     height:3em;
     text-overflow: ellipsis;
-    margin-bottom:0.5rem;
+    margin-bottom:1rem;
 
 }
 a{
-    
     text-decoration: none;
-    color: #111;
 }
 .btn-link{
     display:inline-block;
-    background:#e7edff;
+    background:var(--primary-bg-color-light);
     color:#555;
-    border-radius: 3px;
+    border-radius: calc(var(--primary-border-radius) - 2px);
     font-size:1rem;
     line-height:1;
-    padding:0.5rem;
-    transition:all 0.3s;
+    padding:var(--padding-primary);
+    /* /* transition-property: width background height; */
+    transition-duration: 0.3s; 
 }
 .btn-link:hover{
     color: rgb(255, 255, 255);
@@ -79,12 +156,26 @@ a{
     
     background:var(--primary-color);
 }
+.btn-link::after{
+    display:inline-block;
+    content:'→';
+    width:0;
+    margin-left:0rem;
+    opacity:0;
+    transition:all 0.3s;
+
+}
 .btn-link:hover::after{
+    font-weight: bold;
     content:'→';
     width:auto;
+    opacity:100;
     margin-left:0.5rem;
     color:white;
-    animation:fade-in 0.5s;
+    animation:slide-in-from-left 0.3s ease-out;
+}
+.collapsible-aside{
+    animation: collapse 1s;
 }
 @keyframes fade-in {
     from {
@@ -95,12 +186,14 @@ a{
     }
 }
 
-@keyframes fade-out {
+
+
+
+@keyframes collapse{
     from {
-        opacity:100;
+        width:25rem;
     }
-    to{
-        opacity:0;
+    100% {
+        width:0rem;
     }
 }
-
